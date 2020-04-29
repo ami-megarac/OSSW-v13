@@ -1,0 +1,20 @@
+--- uboot/net/eth-uclass.c	2020-04-22 11:17:19.790079365 -0400
++++ uboot_new/net/eth-uclass.c	2020-04-22 11:21:41.270298074 -0400
+@@ -423,7 +423,7 @@
+ 			if (num_devices)
+ 				printf(", ");
+ 
+-			printf("eth%d: %s", dev->seq, dev->name);
++			printf("eth%d: %s", (dev->seq-1), dev->name);
+ 
+ 			if (ethprime && dev == prime_dev)
+ 				printf(" [PRIME]");
+@@ -521,7 +521,7 @@
+ #ifdef CONFIG_NET_RANDOM_ETHADDR
+ 		net_random_ethaddr(pdata->enetaddr);
+ 		printf("\nWarning: %s (eth%d) using random MAC address - %pM\n",
+-		       dev->name, dev->seq, pdata->enetaddr);
++		       dev->name, (dev->seq - 1), pdata->enetaddr);
+ #else
+ 		printf("\nError: %s address not set.\n",
+ 		       dev->name);
